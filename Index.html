@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>TarefAMoz - Trabalhos Escolares</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: Arial, sans-serif;
+    }
+
+    body {
+      background: #f4f6f8;
+      color: #222;
+    }
+
+    header {
+      background: #006400;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    header h1 {
+      font-size: 32px;
+    }
+
+    header p {
+      margin-top: 8px;
+    }
+
+    nav {
+      background: #004d00;
+      padding: 12px;
+      text-align: center;
+    }
+
+    nav a {
+      color: white;
+      text-decoration: none;
+      margin: 0 12px;
+      font-weight: bold;
+    }
+
+    .hero {
+      background: white;
+      padding: 45px 20px;
+      text-align: center;
+    }
+
+    .hero h2 {
+      font-size: 28px;
+      margin-bottom: 12px;
+    }
+
+    .hero p {
+      color: #555;
+      margin-bottom: 20px;
+    }
+
+    .search {
+      width: 90%;
+      max-width: 500px;
+      padding: 14px;
+      border: 1px solid #ccc;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    .container {
+      width: 90%;
+      max-width: 1100px;
+      margin: 30px auto;
+    }
+
+    .container h2 {
+      margin-bottom: 20px;
+      text-align: center;
+    }
+
+    .cards {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 20px;
+    }
+
+    .card {
+      background: white;
+      padding: 25px;
+      border-radius: 12px;
+      box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+    }
+
+    .card h3 {
+      color: #006400;
+      margin-bottom: 10px;
+    }
+
+    .card p {
+      color: #555;
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      background: #006400;
+      color: white;
+      padding: 10px 15px;
+      border-radius: 6px;
+      text-decoration: none;
+    }
+
+    footer {
+      margin-top: 40px;
+      background: #003300;
+      color: white;
+      text-align: center;
+      padding: 25px;
+    }
+  </style>
+</head>
+
+<body>
+
+  <header>
+    <h1>📚 TarefAMoz</h1>
+    <p>Site de Trabalhos Escolares</p>
+  </header>
+
+  <nav>
+    <a href="#">Início</a>
+    <a href="#disciplinas">Disciplinas</a>
+    <a href="#trabalhos">Trabalhos</a>
+    <a href="#sobre">Sobre</a>
+  </nav>
+
+  <section class="hero">
+    <h2>Bem-vindo ao TarefAMoz</h2>
+    <p>Encontre materiais e trabalhos para ajudar nos seus estudos.</p>
+
+    <input
+      type="text"
+      class="search"
+      placeholder="🔎 Pesquisar trabalho..."
+      onkeyup="pesquisar()"
+      id="pesquisa"
+    >
+  </section>
+
+  <section class="container" id="disciplinas">
+    <h2>📖 Disciplinas</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Matemática</h3>
+        <p>Exercícios, fórmulas e explicações de matemática.</p>
+        <a href="#" class="btn">Ver trabalhos</a>
+      </div>
+
+      <div class="card">
+        <h3>Biologia</h3>
+        <p>Conteúdos e trabalhos relacionados à Biologia.</p>
+        <a href="#" class="btn">Ver trabalhos</a>
+      </div>
+
+      <div class="card">
+        <h3>Física</h3>
+        <p>Fórmulas, exercícios e explicações de Física.</p>
+        <a href="#" class="btn">Ver trabalhos</a>
+      </div>
+
+      <div class="card">
+        <h3>Química</h3>
+        <p>Conteúdos e exercícios de Química.</p>
+        <a href="#" class="btn">Ver trabalhos</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="container" id="trabalhos">
+    <h2>📝 Trabalhos recentes</h2>
+
+    <div class="cards">
+
+      <div class="card">
+        <h3>Metodologia de Investigação</h3>
+        <p>Resumo e conceitos importantes.</p>
+        <a href="#" class="btn">Abrir</a>
+      </div>
+
+      <div class="card">
+        <h3>Ética</h3>
+        <p>Material de apoio para estudantes.</p>
+        <a href="#" class="btn">Abrir</a>
+      </div>
+
+      <div class="card">
+        <h3>Gestão</h3>
+        <p>Funções e conceitos fundamentais da gestão.</p>
+        <a href="#" class="btn">Abrir</a>
+      </div>
+
+    </div>
+  </section>
+
+  <section class="container" id="sobre">
+    <h2>ℹ️ Sobre o TarefAMoz</h2>
+
+    <div class="card">
+      <p>
+        O TarefAMoz é uma plataforma criada para facilitar
+        o acesso dos estudantes a materiais e trabalhos escolares.
+      </p>
+    </div>
+  </section>
+
+  <footer>
+    <p>© 2026 TarefAMoz</p>
+    <p>Educação para todos 🇲🇿</p>
+  </footer>
+
+  <script>
+    function pesquisar() {
+      let texto = document.getElementById("pesquisa").value.toLowerCase();
+      let cards = document.querySelectorAll(".card");
+
+      cards.forEach(function(card) {
+        let conteudo = card.innerText.toLowerCase();
+
+        if (conteudo.includes(texto)) {
+          card.style.display = "block";
+        } else {
+          card.style.display = "none";
+        }
+      });
+    }
+  </script>
+
+</body>
+  </html>
