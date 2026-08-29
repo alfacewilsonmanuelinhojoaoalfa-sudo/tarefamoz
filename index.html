@@ -122,6 +122,7 @@
       padding: 25px;
     }
   </style>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/docx/8.5.0/docx.umd.min.js"></script>
 </head>
 
 <body>
@@ -153,9 +154,39 @@
       <strong>📚 Disciplina:</strong><br>
       <input type="text" id="disciplina" placeholder="Digite a disciplina">
     </p>
+<p>
+  <strong>📝 Tema do trabalho:</strong><br>
+  <input type="text" id="tema" placeholder="Digite o tema do trabalho">
+</p>
+    
+     <div class="card">
+  <h3>💳 Pagamento</h3>
 
-    <p>
-      
+  <p><strong>M-Pesa:</strong> 857 966 476</p>
+
+  <p><strong>e-Mola:</strong> 86 068 6989</p>
+
+  <p>
+    <strong>Número usado no pagamento:</strong><br>
+    <input type="text" id="numeroPagamento" placeholder="Digite o número usado no pagamento">
+  </p>
+
+  <div class="card">
+  <h3>💳 Pagamento</h3>
+
+  <p><strong>M-Pesa:</strong> 857 966 476</p>
+
+  <p><strong>e-Mola:</strong> 86 068 6989</p>
+
+  <p>
+    <strong>Número usado no pagamento:</strong><br>
+    <input type="text" id="numeroPagamento" placeholder="Digite o número usado no pagamento">
+  </p>
+
+  <button type="button" onclick="gerarWord()">
+  📄 Gerar Trabalho em Word
+</button>
+</div>
 
   <section class="container" id="sobre">
     <h2>ℹ️ Sobre o TarefAMoz</h2>
@@ -189,6 +220,65 @@
       });
     }
   </script>
+<script>
+async function gerarWord() {
+  const estudante = document.getElementById("estudante").value;
+  const professor = document.getElementById("professor").value;
+  const escola = document.getElementById("escola").value;
+  const disciplina = document.getElementById("disciplina").value;
+  const tema = document.getElementById("tema").value;
+
+  if (!estudante || !escola || !disciplina || !tema) {
+    alert("Preencha os dados do trabalho.");
+    return;
+  }
+
+  const { Document, Packer, Paragraph, HeadingLevel } = docx;
+
+  const documento = new Document({
+    sections: [{
+      children: [
+        new Paragraph({ text: escola }),
+        new Paragraph({ text: tema }),
+        new Paragraph({ text: "Estudante: " + estudante }),
+        new Paragraph({ text: "Professor: " + professor }),
+        new Paragraph({ text: "Disciplina: " + disciplina }),
+
+        new Paragraph({
+          text: "1. INTRODUÇÃO",
+          heading: HeadingLevel.HEADING_1
+        }),
+        new Paragraph({ text: "Introdução do trabalho." }),
+
+        new Paragraph({
+          text: "2. DESENVOLVIMENTO",
+          heading: HeadingLevel.HEADING_1
+        }),
+        new Paragraph({ text: "Desenvolvimento do trabalho." }),
+
+        new Paragraph({
+          text: "3. CONCLUSÃO",
+          heading: HeadingLevel.HEADING_1
+        }),
+        new Paragraph({ text: "Conclusão do trabalho." }),
+
+        new Paragraph({
+          text: "4. REFERÊNCIAS",
+          heading: HeadingLevel.HEADING_1
+        }),
+        new Paragraph({ text: "Referências bibliográficas." })
+      ]
+    }]
+  });
+
+  const arquivo = await Packer.toBlob(documento);
+  const link = document.createElement("a");
+
+  link.href = URL.createObjectURL(arquivo);
+  link.download = tema + ".docx";
+  link.click();
+}
+</script>
 <!-- Pesquisa Google -->
 <script async src="https://cse.google.com/cse.js?cx=026a5502c46c149db"></script>
 <div class="gcse-search"></div><p>🔎 Pesquise aqui os seus trabalhos escolares.</p>
