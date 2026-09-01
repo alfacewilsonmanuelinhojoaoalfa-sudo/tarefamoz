@@ -157,7 +157,11 @@
 <p>
   <strong>📝 Tema do trabalho:</strong><br>
   <input type="text" id="tema" placeholder="Digite o tema do trabalho">
-</p>
+</p><button type="button" onclick="pesquisarTema()">
+  🔎 Pesquisar tema automaticamente
+</button>
+
+<div id="resultadoPesquisa"></div>
     
 
   <div class="card">
@@ -270,6 +274,30 @@ async function gerarWord() {
   link.href = URL.createObjectURL(arquivo);
   link.download = tema + ".docx";
   link.click();
+}
+</script>
+<script>
+function pesquisarTema() {
+  const tema = document.getElementById("tema").value.trim();
+
+  if (!tema) {
+    alert("Digite primeiro o tema do trabalho.");
+    return;
+  }
+
+  const resultado = document.getElementById("resultadoPesquisa");
+
+  const pesquisaGoogle =
+    "https://www.google.com/search?q=" + encodeURIComponent(tema);
+
+  resultado.innerHTML = `
+    <p>🔎 Pesquisando sobre: <strong>${tema}</strong></p>
+    <p>
+      <a href="${pesquisaGoogle}" target="_blank">
+        📚 Ver resultados da pesquisa
+      </a>
+    </p>
+  `;
 }
 </script>
 <!-- Pesquisa Google -->
